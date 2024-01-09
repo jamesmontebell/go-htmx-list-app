@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <ul id="film-list">
+      {{ range .Films }} {{block "film-list-element" .}}
+      <li>{{.Title}} - {{.Director}}</li>
+      {{end}} {{ end }}
+    </ul>
+
+    <form hx-post="/add-film/" hx-target="#film-list" hx-swap="beforeend">
+      <label for="film-title">Title</label>
+      <input type="text" name="title" id="film-title" />
+      <label for="Director">Director</label>
+      <input type="text" name="director" id="film-director" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
